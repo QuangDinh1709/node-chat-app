@@ -17,17 +17,16 @@ function scrollToBottom () {
   }
 }
 socket.on('connect', function ()  {
-  console.log('Connect to server');
+  var params = jQuery.deparam(window.location.search);
+  socket.emit('join',params, function (err) {
+    if(err) {
+      alert(err);
+      window.location.href = '/';
+    } else {
+      console.log('No error');
+    }
+  });
 
-  // socket.emit('createEmail',{
-  //   to : 'jen@hello.com',
-  //   text : 'Hey . This is Andrew.'
-  // });
-
-  // socket.emit('createMessage',{
-  //   from : 'ABC',
-  //   text : 'Yup, that works for me'
-  // });
 });
 
 socket.on('disconnect', function () {
